@@ -31,13 +31,15 @@ class Class_info(Base):
     def __repr__(self):
         return f'Class_info( {self.class_code}, {self.class_mamager}, {self.class_host}, {self.class_assistant}, {self.class_room}, {self.class_room_memo}, {self.class_details}, {self.singup_restrictions_no} )'
 
+# 新增資料表
 def create_table():
     Base.metadata.create_all(engine)
 
+# 刪除資料表
 def drop_table():
     Base.metadata.drop_all(engine)
 
-
+# 建立實體類別
 def create_session():
     # 把 DB engine 與 session 綁在一起
     Session = sessionmaker(bind=engine)
@@ -45,6 +47,7 @@ def create_session():
     session = Session()
     return session
 
+# 批次新增資料
 def add_dataset(sc):
 
     sc.add_all([
@@ -52,7 +55,7 @@ def add_dataset(sc):
     Class_info(class_code='D189018', class_mamager='王延平', class_host=NULL, class_assistant=NULL, class_room='歸元講堂六樓', class_room_memo=NULL, class_details=NULL, singup_restrictions_no=NULL),
     Class_info(class_code='D188015', class_mamager='蔡玲君', class_host=NULL, class_assistant=NULL, class_room='北部光明佛堂', class_room_memo=NULL, class_details=NULL, singup_restrictions_no=NULL)
     ])
-    
+
 def main():
     sc = create_session()
     add_dataset(sc)
